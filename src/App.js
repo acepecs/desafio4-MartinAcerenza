@@ -3,15 +3,17 @@ import './App.css';
 import Navbar from './components/Navbar';
 import ItemListContainer from './components/ItemListContainer';
 import Products from './components/Products';
+import ItemCount from './components/ItemCount';
 
 const App = () => {
   return (
     <>
     <div className="App">
-     <h1>Granja organica</h1>
+     <h1>Cuidemos la tierra</h1>
      <hr/>
      <Navbar></Navbar>
      <ItemListContainer greeting='Hola usuario'></ItemListContainer>
+     <ItemCount></ItemCount>
     </div>
     <h2>
       Productos 
