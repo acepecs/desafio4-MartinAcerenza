@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import './App.css';
+import Navbar from './components/Navbar';
+import ItemListContainer from './components/ItemListContainer';
+import Products from './components/Products';
+
+const App = () => {
   return (
+    <>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <h1>Granja organica</h1>
+     <hr/>
+     <Navbar></Navbar>
+     <ItemListContainer greeting='Hola usuario'></ItemListContainer>
     </div>
+    <h2>
+      Productos 
+    </h2>
+    {/*productos("miel", "Precio: $800")*/}
+    <Products name="miel" price="Precio: $800"/>
+    {/*productos("azucar mascabo","Precio: $500")*/}
+    <Products name="azucar mascabo" price="Precio: $500"/>
+    <div>
+      Formas de pago
+    </div>
+    </>
+
   );
 }
 
