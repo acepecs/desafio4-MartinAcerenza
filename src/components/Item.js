@@ -1,6 +1,4 @@
 
-import { Link } from 'react-router-dom';
-
 
 const Item = ({ id, name, stock, cost, pictureUrl }) => {
     return (
