@@ -7,8 +7,8 @@ const Cart = () => {
     return (
         <>
         {
-            test.length === 0 ? <p>Your Cart is empty</p> 
-            : test.map((item) => (<p>{item.name}</p>))
+            test.cartList.length === 0 ? <p>Your Cart is empty</p> 
+            : test.cartList.map((item) => (<p>{item.name}</p>))
         }
         </>
     );
