@@ -1,30 +1,27 @@
+import './ItemListContainer.css';
 import ItemList from './ItemList';
-import customFetch from "../utils/customFetch";
-import ItemCount from "./ItemCount";
-import { useEffect, useState } from "react";
-const { products } = require('../utils/products');
+import CustomFetch from '../utils/CustomFetch'
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+const { productos } = require('../utils/productos');
 
 const ItemListContainer = (props) => {
+    const [datos, setDatos] = useState([]);
+    const { id } = useParams();
 
-    const [datos,setDatos] = useState([]);
+    let productosMostrar = id === undefined ? productos : productos.filter(item => item.categoria === parseInt(id));
 
-  useEffect (() => {
-    customFetch(2000,products)
-    .then(result => setDatos(result))
-    .catch(err => console.log(err))
-  }, [])
+    useEffect(() => {
+        CustomFetch(100, productosMostrar)
+            .then(result => setDatos(result))
+            .catch(err => console.log(err))
+    }, [datos, id]);
 
-  const onAdd = (compras) => {
-    alert ("has comprado " + compras + " items" )
-}
     return (
-      <>
-      <div>{props.greeting}</div>
-      <ItemList items={datos}/>
-      <h2>Contador</h2>
-      <ItemCount stock="5" initial={1} onAdd={onAdd}></ItemCount>
-      </>
-    )
-  }
+            <div>
+                <ItemList items={datos} /> 
+            </div>
+        );
+}
 
-  export default ItemListContainer;
+export default ItemListContainer;

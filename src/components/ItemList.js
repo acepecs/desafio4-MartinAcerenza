@@ -1,15 +1,15 @@
-import Item from "./Item"
+import Item from "./Item";
 
 const ItemList = ({ items }) => {
     return (
-        <div>
+        <>
         {
-            items.length > 0
-            ? items.map(item => <Item key={item.id} id={item.id} title={item.name} price={item.cost} pictureUrl={item.pictureUrl} stock={item.stock} />)
+            items?.length > 0
+            ? items.map(item => <Item id={item.id} nombre={item.nombre} precio={item.precio} imagen={item.imagen} stock={item.stock} />)
             : <p>Cargando...</p>
         }
-        </div>
-    )
+        </>
+    );
 }
 
 export default ItemList;

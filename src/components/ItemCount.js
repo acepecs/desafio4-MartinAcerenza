@@ -1,30 +1,41 @@
-import { useState } from "react"
+import  './ItemCount.css';
+import Remove from '@mui/icons-material/Remove';
+import Add from '@mui/icons-material/Add';
+import { Button } from '@mui/material';
+import { useEffect, useState } from "react";
 
-const ItemCount = ({stock, initial, onAdd}) => {
+const ItemCount = ({ stock = 0, initial = 1,  onAdd }) => { 
 
-    const [compras, setCompras] = useState (1);
+    const [count, setCount] = useState(0);
 
-    const Increment = () =>{
+    useEffect(() => {
+        setCount(initial);
+    },[]);
 
-        if (compras < 5) setCompras(compras+1);
+    const increment = () => {
+        if (count < stock) {
+            setCount(count + 1);
+        }
     }
-
-    const Decrease = () => {
-        if (compras > 0) setCompras(compras-1);
+    
+    const decrement = () => {
+        if (count > initial) {
+            setCount(count - 1);
+        }
     }
-
-    return(
-    <div>
-        <botton onClick={Increment}>+</botton>
-        <div>
-        {compras} 
+    return (
+        <>
+        <div className= "ProductAmountContainer">
+            <Button variant="text" onClick={increment}><Add /></Button>
+            <div className="ProductAmount">{count}</div>
+            <Button variant="text" onClick={decrement}><Remove /></Button>
+            {
+                stock && count
+                ? <Button variant="contained" color="primary" onClick={() => onAdd(count)}>Agregar al carrito</Button>
+                : <Button variant="contained" disabled>Agregar al carrito</Button>
+            }
         </div>
-        <botton onClick={Decrease}>-</botton>
-        <div>
-        <button onClick={() => onAdd(compras)}>agregar compra</button>
-        </div>
-    </div>
-    )
+        </>
+    );  
 }
-
 export default ItemCount;

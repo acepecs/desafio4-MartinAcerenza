@@ -1,19 +1,22 @@
+import  './Item.css';
+import { Link } from 'react-router-dom';
 
-
-const Item = ({ id, name, stock, cost, pictureUrl }) => {
+const Item = ({ id, nombre, stock, precio, imagen }) => {
     return (
-        <div>
-            <div />
-            <div src={pictureUrl} />
-            <div>
-                <div>
-                    <div /><strong>$ {cost}</strong>
-                </div>
-                <div>
-                    <div/>{stock} unid.
-                </div>
+        <div className="card producto">
+            <div className="badge bg-dark text-white position-absolute">
+                {stock > 0 ? 'Hay stock' : 'Sin Stock'}
+            </div>
+            <img src={require("../images" + imagen)} className="card-img-top producto-zoom" alt={nombre}/>
+            <div className="card-body">
+                <p className="card-text">{nombre}</p>
+                <div className="precios"> $ {precio}</div>
+                <Link to={`/item/${id}`}>
+                    <button className="btn btn-primary">Agregar al carrito</button>
+                </Link>
             </div>
         </div>
+        
     );
 }
 

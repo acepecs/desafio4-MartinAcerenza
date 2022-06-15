@@ -1,43 +1,53 @@
-import { Button } from '@material-ui/core';
-import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { CartContext } from './CartContext';
 import ItemCount from './ItemCount';
+import { useState, useContext } from 'react';
+import { CartContext } from './CartContext';
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
 const ItemDetail = ({ item }) => {
     const [itemCount, setItemCount] = useState(0);
-    const test = useContext(CartContext)
+    const contexto = useContext (CartContext);
 
     const onAdd = (qty) => {
         alert("You have selected " + qty + " items.");
         setItemCount(qty);
-        //agregar este producto al carrito
-        test.addToCart(item);
+        contexto.addToCart(item, qty);
     }
-
+    
     return (
         <>
         {
-            item && item.pictureUrl
-            ? 
-            <div>
-                <div>
-                    <div>
-                        <div src={item.pictureUrl[1]} />
+            item.imagen ? 
+                <section>
+                    <div className="container py-5">
+                        <div className="row justify-content-center">
+                        <div className="col-md-8 col-lg-6 col-xl-4">
+                            <div className="card text-black">
+                            <i className="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
+                            <img src={require("../images" + item.imagen)}
+                                className="card-img-top" alt="Apple Computer" />
+                            <div className="card-body">
+                                <div className="text-center">
+                                <h5 className="card-title">{item.nombre}</h5>
+                                </div>
+                                <div className="d-flex justify-content-between">
+                                    <span>Precio</span><span>${item.precio}</span>
+                                </div>
+        
+                                <div className="d-flex justify-content-between total font-weight-bold mt-4">
+                                {
+                                     itemCount === 0
+                                         ? <ItemCount stock={item.stock} initial={itemCount} onAdd={onAdd} />
+                                         : <Link to='/cart'><Button variant="contained" color="secondary">CheckOut</Button></Link>
+                                }
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                     </div>
-                    <div>
-                        <div>{item.name}</div>
-                        <div>$ {item.cost}</div>
-                        <div>{item.stock} unidades en stock</div>
-                    </div>
-                    {
-                        itemCount === 0
-                        ? <ItemCount stock={item.stock} initial={itemCount} onAdd={onAdd} />
-                        : <Link to='/Cart' style={{textDecoration: "none"}}><Button variant="contained" color="secondary">CheckOut</Button></Link>
-                    }
-                </div>
-            </div>
+                    </section>
             : <p>Cargando...</p>
         }
         </>
